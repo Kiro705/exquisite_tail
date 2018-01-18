@@ -1,2 +1,2 @@
-#Exquisite Tail
+# Exquisite Tail
 ### A Storytelling Mashup Game
