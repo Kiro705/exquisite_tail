@@ -15,8 +15,8 @@ const Main = (props) => {
 
   return (
     <div>
-      <h1>Title?</h1>
       <nav>
+        <h1>Exquisite Tail</h1>
         {
           isLoggedIn
             ? <div>
