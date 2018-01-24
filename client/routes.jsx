@@ -12,28 +12,36 @@ import {me} from './store'
  */
 class Routes extends Component {
   componentDidMount () {
-    this.props.loadInitialData()
+    this.props.loadInitialData(this)
+    console.log(this.props.loadingUser, 'Loading?')
+    console.log(this.props.isLoggedIn, 'Logged In?')
   }
 
   render () {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, loadingUser} = this.props
 
     return (
       <Router history={history}>
         <Main>
-          <Switch>
-            <Route path='/login' component={Login} />
-            <Route path='/signup' component={Signup} />
-            {
-              isLoggedIn &&
-                <Switch>
-                  <Route path='/home' component={UserHome} />
-                  <Route path='/beginTheStory' component={NewStory} />
-                  <Redirect to='/home' />
-                </Switch>
-            }
-            <Redirect to='/login' />
-          </Switch>
+          {
+            loadingUser ? 
+              <h1>LOADING...</h1> :
+              <Switch>
+                <Route path='/login' component={Login} />
+                <Route path='/signup' component={Signup} />
+                {
+                  isLoggedIn &&
+                    <Switch>
+                      <Route path='/home' component={UserHome} />
+                      <Route path='/beginTheStory' component={NewStory} />
+                      <Redirect to='/home' />
+                    </Switch>
+                }
+                {
+                  isLoggedIn ? <Redirect to='/home' /> : <Redirect to='/login' />
+                }
+              </Switch>
+          }
         </Main>
       </Router>
     )
@@ -45,14 +53,19 @@ class Routes extends Component {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    loadingUser: true
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData () {
+    loadInitialData (component) {
       dispatch(me())
+      .then(res => {
+        component.setState({loadingUser:false})
+        console.log('hi', component.props)
+      })
     }
   }
 }

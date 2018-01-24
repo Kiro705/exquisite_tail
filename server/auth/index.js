@@ -3,6 +3,7 @@ const User = require('../db/models/user')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
+  console.log('/login')
   User.findOne({where: {email: req.body.email}})
     .then(user => {
       if (!user) {
@@ -17,6 +18,7 @@ router.post('/login', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
+  console.log('/signup')
   User.create(req.body)
     .then(user => {
       req.login(user, err => err ? next(err) : res.json(user))
@@ -34,6 +36,7 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
+  console.log('/me')
   res.json(req.user)
 })
 
