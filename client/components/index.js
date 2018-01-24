@@ -6,3 +6,4 @@
 export {default as Main} from './main.jsx'
 export {default as UserHome} from './user-home.jsx'
 export {Login, Signup} from './auth-form.jsx'
+export {default as NewStory} from './new-story.jsx'
