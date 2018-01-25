@@ -15,8 +15,11 @@ const Main = (props) => {
 
   return (
     <div>
-      <nav>
-        <h1>Exquisite Tail</h1>
+      <nav className='main-color-light'>
+        <div>
+          <img className='title-logo' src='Exquisite_tail_logo.png' alt='Exquisite Tail Logo'/>
+          <h1 className='title'>Exquisite Tail</h1>
+        </div>
         {
           isLoggedIn
             ? <div>

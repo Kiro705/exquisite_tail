@@ -13,8 +13,6 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData(this)
-    // console.log(this.state.isDoneLoading, 'Done Loading?')
-    // console.log(this.props.isLoggedIn, 'Logged In?')
   }
 
   render () {
@@ -22,7 +20,8 @@ class Routes extends Component {
     return (
       <Router history={history}>
         <Main>
-          {
+          { 
+            //We set the state after loading the user (line 64)
             !this.state ? 
               <h1>LOADING...</h1> :
               <Switch>
@@ -62,9 +61,8 @@ const mapDispatch = (dispatch) => {
     loadInitialData (component) {
       dispatch(me())
       .then(res => {
+        //This is where we say we are done loading by setting the setting the state.
         component.setState({isDoneLoading: true})
-      }).then(res => {
-        console.log('hi', component)
       })
     }
   }

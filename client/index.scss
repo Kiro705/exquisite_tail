@@ -1,3 +1,32 @@
+
+//Color Setup
+$colorArray: one two three;
+$colorChoice: nth($colorArray, 3);
+//colorArray index starts at 1, not 0
+
+$mainColor: null;
+$mainColorLight: null;
+$accentColor: null;
+$accentColorLight: null;
+
+@if $colorChoice == one {
+  $mainColor: #F6820D;
+  $mainColorLight: #F7BA7C;
+  $accentColor: #61C614;
+  $accentColorLight: #DDF8C7;
+} @else if $colorChoice == two {
+  $mainColor: #aa0813;
+  $mainColorLight: #FCF4DD;
+  $accentColor: #EBD460;
+  $accentColorLight: #255F32;
+} @else {
+  //this is a white and blue color pallet
+  $mainColor: white;
+  $mainColorLight: lightblue;
+  $accentColor: black;
+  $accentColorLight: darkred;
+}
+
 body {
   font-family: sans-serif;
 
@@ -12,10 +41,36 @@ body {
   nav a {
     display: inline-block;
     margin: 1em;
+    color: $accentColorLight;
   }
 
   form div {
     margin: 1em;
     display: inline-block;
+  }
+
+  .main-color{
+    background-color: $mainColor;
+  }
+
+  .main-color-light{
+    background-color: $mainColorLight;
+  }
+
+  .font-color-light{
+    color: $accentColorLight;
+  }
+
+  .title {
+    display: inline-block;
+    margin: 0 0 0 18px;
+    vertical-align: top;
+    padding-top: 30px;
+  }
+  .title-logo {
+    display: inline-block;
+    padding: 10px 0 0 12px;
+    height: 64px;
+    width: 64px;
   }
 }
