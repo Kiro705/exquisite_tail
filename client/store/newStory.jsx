@@ -29,9 +29,9 @@ export const writeChapterLength = (chapterLength) => ({type: WRITE_CHAPTER_LENGT
 export const writeChapterAmount = (chapterAmount) => ({type: WRITE_CHAPTER_AMOUNT, chapterAmount})
 
 // //THUNKS
-export function postStory(story){
+export function postStory(story, userId){
 	return function thunk (dispatch) {
-		return axios.post('/api/stories', story)
+		return axios.post('/api/stories', {story, userId})
 			.then(res => res.data)
 			.then(newStory => {
 				dispatch(postStoryAction(newStory))

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Story} = require('../db/models')
+const {Story, User} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -9,7 +9,13 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  Story.create(req.body)
+  Story.create(req.body.story)
+  	.then(newStory => {
+  		User.findById(req.body.userId)
+  		.then(author => {
+  			newStory.setUser(author)
+  		})
+  	})
     .then(newStory => res.json(newStory))
     .catch(next)
 })
