@@ -14,6 +14,10 @@ const Story = db.define('story', {
   	type: Sequelize.INTEGER,
 		allowNull: false
   },
+  currentChapter: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1
+  },
   public: {
   	type: Sequelize.BOOLEAN,
   	defaultValue: true

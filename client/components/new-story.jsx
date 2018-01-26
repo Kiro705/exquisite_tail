@@ -68,7 +68,7 @@ function mapDispatchToProps (dispatch, ownProps){
     },
     handleSubmit: function(evt, userId){
       evt.preventDefault();
-      dispatch(postStory({title: evt.target.title.value, chapterLength: evt.target.chapterLength.value, chapterAmount: evt.target.chapterAmount.value}, userId, ownProps.history))
+      dispatch(postStory({title: evt.target.title.value, chapterLength: evt.target.chapterLength.value, chapterAmount: evt.target.chapterAmount.value}, userId))
     }
   }
 }

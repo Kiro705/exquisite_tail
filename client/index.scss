@@ -86,14 +86,12 @@ body {
 
 }
 
-.authoredStories {
-  background-color: red;
-  height: 200px;
-  padding: 0 20px;
+.storyList {
+  padding: 0 20px 20px 20px;
 }
 
-.contribStories {
-  background-color: green;
-  height: 200px;
-  padding: 0 20px;
+.storyThumb {
+  background-color: $mainColorLight;
+  padding: 1px 8px;
+  margin-bottom: 10px
 }
