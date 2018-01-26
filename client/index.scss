@@ -29,6 +29,11 @@ $accentColorLight: null;
 
 body {
   font-family: sans-serif;
+  margin: 0;
+
+  hr {
+    margin: 0;
+  }
 
   a {
     text-decoration: none;
@@ -65,12 +70,30 @@ body {
     display: inline-block;
     margin: 0 0 0 18px;
     vertical-align: top;
-    padding-top: 30px;
+    padding-top: 19px;
   }
+
   .title-logo {
     display: inline-block;
     padding: 10px 0 0 12px;
     height: 64px;
     width: 64px;
   }
+
+  .home-component {
+    margin: 0px;
+  }
+
+}
+
+.authoredStories {
+  background-color: red;
+  height: 200px;
+  padding: 0 20px;
+}
+
+.contribStories {
+  background-color: green;
+  height: 200px;
+  padding: 0 20px;
 }

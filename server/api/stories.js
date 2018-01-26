@@ -8,6 +8,12 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+router.get('/myAuthoredStories/:userId', (req, res, next) => {
+  Story.findAll({where: {userId: req.params.userId}})
+    .then(storyList => res.json(storyList))
+    .catch(next)
+})
+
 router.post('/', (req, res, next) => {
   Story.create(req.body.story)
   	.then(newStory => {

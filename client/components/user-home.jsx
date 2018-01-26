@@ -1,18 +1,29 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Col, Row} from 'react-bootstrap'
+import {getUsersStories} from '../store'
 
 /**
  * COMPONENT
  */
-export const UserHome = (props) => {
-  const {email} = props
+class UserHome extends Component {
+  componentDidMount () {
+    this.props.loadUserStories(this.props.user.id)
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
+  render () {
+    return (
+    <Row className='home-component'>
+      <Col xs={12}>
+        <h3>Welcome, {this.props.user.email}</h3>
+      </Col>
+      <Col className='authoredStories' sm={6} xs={12}> 
+      </Col>
+      <Col className='contribStories' sm={6} xs={12}></Col>
+    </Row>
   )
+  }
 }
 
 /**
@@ -20,11 +31,21 @@ export const UserHome = (props) => {
  */
 const mapState = (state) => {
   return {
-    email: state.user.email
+    user: state.user,
+    authoredStories: state.stories.authoredStories,
+    contribStories: state.stories.contribStories
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = (dispatch) => {
+  return {
+    loadUserStories (id) {
+      dispatch(getUsersStories(id))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
 
 /**
  * PROP TYPES
