@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {logout} from '../store'
+import {logout, getNotifications} from '../store'
 
 /**
  * COMPONENT
@@ -11,7 +11,11 @@ import {logout} from '../store'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn} = props
+  const {children, handleClick, isLoggedIn, notifications} = props
+
+  if(isLoggedIn){
+    console.log('were in!')
+  }
 
   return (
     <div>
@@ -27,6 +31,7 @@ const Main = (props) => {
               <Link to='/home'>Home</Link>
               <Link to='/beginTheStory'>New Story</Link>
               <Link to='/friends'>Friends</Link>
+              <Link to='/friends'>Notifications {notifications.length}</Link>
               <a href='#' onClick={handleClick}>Logout</a>
             </div>
             : <div>
@@ -47,7 +52,9 @@ const Main = (props) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user,
+    notifications: state.notifications,
   }
 }
 

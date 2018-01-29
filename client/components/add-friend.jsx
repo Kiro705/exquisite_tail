@@ -28,7 +28,7 @@ const AddFriend = (props) => {
 const mapStateToProps = function(state) {
   return {
     user: state.user,
-    requestResult: state.friendRequest.result
+    requestResult: state.friendRequests.result
   }
 }
 
