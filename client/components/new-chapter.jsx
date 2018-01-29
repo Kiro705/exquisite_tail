@@ -20,9 +20,10 @@ function NewChapter(props){
           </span>
           <input
             autoComplete= "off"
+            className= "chapterInput"
             type="text"
             name="title"
-            onChange={props.handleTitle}
+            onChange={props.handelContent}
           />
         </div>
         <button type="submit" id="submit">Click to Post</button>
@@ -38,7 +39,10 @@ function mapDispatchToProps (dispatch, ownProps){
     },
     handleSubmit: function(evt, userId, storyId){
       evt.preventDefault();
-      dispatch(postStory({title: evt.target.title.value, chapterLength: evt.target.chapterLength.value, chapterAmount: evt.target.chapterAmount.value}, userId, storyId))
+      const title = evt.target.title.value
+      const chapterLength = evt.target.chapterLength.value
+      const chapterAmount = evt.target.chapterAmount.value
+      dispatch(postStory({title, chapterLength, chapterAmount}, userId, storyId))
     }
   }
 }

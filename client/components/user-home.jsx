@@ -14,7 +14,6 @@ class UserHome extends Component {
   }
 
   render () {
-    console.log(this.props)
     return (
     <Row className='home-component'>
       <Col xs={12}>

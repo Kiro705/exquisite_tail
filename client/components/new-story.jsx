@@ -19,6 +19,7 @@ function NewStory(props){
             <h5>Title</h5>
           </span>
           <input
+            className = "chapterInput"
             autoComplete= "off"
             type="text"
             name="title"
@@ -68,10 +69,12 @@ function mapDispatchToProps (dispatch, ownProps){
     },
     handleSubmit: function(evt, userId){
       evt.preventDefault();
-      dispatch(postStory({title: evt.target.title.value, chapterLength: evt.target.chapterLength.value, chapterAmount: evt.target.chapterAmount.value}, userId))
+      const title = evt.target.title.value
+      const chapterLength = evt.target.chapterLength.value
+      const chapterAmount = evt.target.chapterAmount.value
+      dispatch(postStory({title, chapterLength, chapterAmount}, userId))
     }
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewStory)
