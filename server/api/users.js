@@ -12,3 +12,14 @@ router.get('/', (req, res, next) => {
     .then(users => res.json(users))
     .catch(next)
 })
+
+router.put('/', (req, res, next) => {
+  User.findById(req.body.userId)
+  .then(user => {
+  	user.update(req.body.newUserObj)
+  	.then(updatedUser => {
+  		res.json(updatedUser)
+  	})
+  })
+  .catch(next)
+})

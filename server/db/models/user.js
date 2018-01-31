@@ -16,7 +16,11 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
-  }
+  },
+  socketId: {
+    type: Sequelize.STRING,
+    defaultValue: 'logged-out'
+  },
 })
 
 module.exports = User

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import socket from '../socket.js'
 
 /**
  * ACTION TYPES
@@ -33,8 +34,10 @@ export function makeFriendRequest(email, userId){
 		return axios.post(`/api/friendRequests/`, {email, userId})
 			.then(res => res.data)
 			.then(requestResult => {
-				switch(requestResult){
+				switch(requestResult[0]){
 					case 'success':
+						const recipient = requestResult[1]
+						socket.sendNotification(recipient.socketId, recipient.id)
 						dispatch(successAction())
 						break
 					case 'self-user-failure':

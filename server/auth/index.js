@@ -11,14 +11,16 @@ router.post('/login', (req, res, next) => {
       } else if (!user.correctPassword(req.body.password)) {
         res.status(401).send('Incorrect password')
       } else {
-        req.login(user, err => err ? next(err) : res.json(user))
+        user.update({socketId: req.body.socketId})
+        .then(user => {
+          req.login(user, err => err ? next(err) : res.json(user))
+        })
       }
     })
     .catch(next)
 })
 
 router.post('/signup', (req, res, next) => {
-  console.log('/signup')
   User.create(req.body)
     .then(user => {
       req.login(user, err => err ? next(err) : res.json(user))
@@ -30,13 +32,19 @@ router.post('/signup', (req, res, next) => {
     })
 })
 
-router.post('/logout', (req, res) => {
-  req.logout()
-  res.redirect('/')
+router.post('/logout', (req, res, next) => {
+  User.findById(req.body.userId)
+  .then(user => {
+    user.update({socketId: 'logged-out'})
+  })
+  .then(result => {
+    req.logout()
+    res.redirect('/')
+  })
+  .catch(next)
 })
 
 router.get('/me', (req, res) => {
-  console.log('/me')
   res.json(req.user)
 })
 

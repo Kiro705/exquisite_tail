@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Col, Row} from 'react-bootstrap'
-import {getUsersStories} from '../store'
+import {getUsersStories, getNotifications} from '../store'
 import StoryContainer from './story-container.jsx'
 
 /**
@@ -10,7 +10,7 @@ import StoryContainer from './story-container.jsx'
  */
 class UserHome extends Component {
   componentDidMount () {
-    this.props.loadUserStories(this.props.user.id)
+    this.props.loadUserData(this.props.user.id)
   }
 
   render () {
@@ -43,8 +43,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadUserStories (id) {
+    loadUserData(id) {
       dispatch(getUsersStories(id))
+      dispatch(getNotifications(id))
     }
   }
 }

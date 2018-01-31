@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
+const UPDATE_USER = 'UPDATE_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -16,6 +17,7 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
+const updateUserAction = user => ({type: UPDATE_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -28,19 +30,29 @@ export const me = () =>
         dispatch(getUser(res.data || defaultUser)))
       .catch(err => console.log(err))
 
-export const auth = (email, password, method) =>
+export const auth = (email, password, method, socketId) =>
   dispatch =>
-    axios.post(`/auth/${method}`, { email, password })
+    axios.post(`/auth/${method}`, { email, password, socketId })
       .then(res => {
         dispatch(getUser(res.data))
         history.push('/home')
       })
       .catch(error =>
         dispatch(getUser({error})))
+ 
+export function updateUser (newUserObj, userId){
+  return function thunk (dispatch) {
+    return axios.put('/api/users', {newUserObj, userId})
+      .then(updatedUser => {
+        dispatch(updateUserAction(updatedUser.data))
+      })
+      .catch(err => console.log(err))
+  }
+}   
 
-export const logout = () =>
+export const logout = (userId) =>
   dispatch =>
-    axios.post('/auth/logout')
+    axios.post('/auth/logout', {userId})
       .then(res => {
         dispatch(removeUser())
         history.push('/login')
@@ -53,6 +65,8 @@ export const logout = () =>
 export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
+      return action.user
+    case UPDATE_USER:
       return action.user
     case REMOVE_USER:
       return defaultUser

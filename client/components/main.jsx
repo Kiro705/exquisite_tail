@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {logout, getNotifications} from '../store'
+import {logout, updateUser} from '../store'
+import socket from '../socket.js'
 
 /**
  * COMPONENT
@@ -11,10 +12,12 @@ import {logout, getNotifications} from '../store'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, notifications} = props
+  const {children, handleClick, handleNotifications, handleSocketUpdate, isLoggedIn, notifications, user} = props
 
   if(isLoggedIn){
-    console.log('were in!')
+    if(user.socketId !== socket.id){
+      handleSocketUpdate(socket.id, user.id)
+    }
   }
 
   return (
@@ -32,7 +35,7 @@ const Main = (props) => {
               <Link to='/beginTheStory'>New Story</Link>
               <Link to='/friends'>Friends</Link>
               <Link to='/friends'>Notifications {notifications.length}</Link>
-              <a href='#' onClick={handleClick}>Logout</a>
+              <a href='#' onClick={() => {handleClick(user.id)}}>Logout</a>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
@@ -60,9 +63,12 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick () {
-      dispatch(logout())
-    }
+    handleClick (userId) {
+      dispatch(logout(userId))
+    },
+    handleSocketUpdate (socketId, userId){
+      dispatch(updateUser({socketId}, userId))
+    },
   }
 }
 

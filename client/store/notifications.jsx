@@ -20,9 +20,11 @@ const getNotificationsActions = (notifications) => ({type: GET_NOTIFICATIONS, no
 // //THUNKS
 export function getNotifications(userId){
 	return function thunk (dispatch) {
-		return axios.post(`/api/notifications/${userId}`)
+		return axios.get(`/api/notifications/${userId}`)
 			.then(res => res.data)
-			.then(console.log)
+			.then(notifications => 
+				dispatch(getNotificationsActions(notifications))
+			)
 			.catch(err => console.log(err))
 	}
 }
@@ -33,7 +35,7 @@ export function getNotifications(userId){
 export default function (state = notifications, action) {
 	switch (action.type) {
 	case GET_NOTIFICATIONS:
-		return state
+		return action.notifications
 	default:
 		return state
 	}
