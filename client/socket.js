@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import {getNotifications} from './store'
+import store, {getNotifications} from './store'
 
 
 const socket = io(window.location.origin)
@@ -13,9 +13,7 @@ socket.on('connect', () => {
 })
 
 socket.on('recievedNotification', function(userId){
-	console.log('You got a notification, user #', userId, '!')
-	//how to dispatch?
-	// getNotifications(userId)
+	store.dispatch(getNotifications(userId))
 })
 
 export default socket
