@@ -34,7 +34,7 @@ const Main = (props) => {
               <Link to='/home'>Home</Link>
               <Link to='/beginTheStory'>New Story</Link>
               <Link to='/friends'>Friends</Link>
-              <Link to='/friends'>Notifications {notifications.length}</Link>
+              <Link to='/notifications'>Notifications {notifications.length}</Link>
               <a href='#' onClick={() => {handleClick(user.id)}}>Logout</a>
             </div>
             : <div>
