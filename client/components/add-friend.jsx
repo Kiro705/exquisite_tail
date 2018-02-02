@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import {Button} from 'react-bootstrap'
 import {makeFriendRequest} from '../store'
 
 /**
@@ -14,10 +15,9 @@ const AddFriend = (props) => {
       <form onSubmit={(evt) => {props.handleSubmit(evt, user.id)}} >
         <div>
           <label htmlFor='email'><small>Friend's Email</small></label>
-          <input name='email' type='text' />
-        </div>
-        <div>
-          <button type='submit'>Request Friend</button>
+          <input className='friendInput' name='email' type='text' />
+          <div />
+          <Button type='submit' className='button'>Request Friend</Button>
         </div>
         {requestResult &&  <div> {requestResult} </div>}
       </form>

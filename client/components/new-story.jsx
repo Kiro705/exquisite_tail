@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Button} from 'react-bootstrap'
 import {writeTitle, writeChapterLength, writeChapterAmount, postStory} from '../store'
 
 const mapStateToProps = function(state) {
@@ -19,7 +20,7 @@ function NewStory(props){
             <h5>Title</h5>
           </span>
           <input
-            className = "chapterInput"
+            className = 'storyInput'
             autoComplete= "off"
             type="text"
             name="title"
@@ -31,6 +32,7 @@ function NewStory(props){
             <h5>Number of Chapters</h5>
           </span>
           <input
+            className = 'storyInput'
             autoComplete= "off"
             type="number"
             name="chapterAmount"
@@ -43,6 +45,7 @@ function NewStory(props){
             <h5>Length of Chapters</h5>
           </span>
           <input
+            className = 'storyInput'
             autoComplete= "off"
             type="number"
             name="chapterLength"
@@ -50,7 +53,7 @@ function NewStory(props){
             onChange={props.handleChapterLength}
           />
         </div>
-        <button type="submit" id="submit">Click to Begin</button>
+        <Button type="submit" id="submit" className='button'>Click to Begin</Button>
       </form>
     </div>
   )
