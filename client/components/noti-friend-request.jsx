@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Row} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 
 /**
  * COMPONENT
@@ -7,9 +7,11 @@ import {Col, Row} from 'react-bootstrap'
 export default function NotiFriendRequest(props){
   return (
 		<div className='notification'>
-      {
-        <h5>User # {props.info.senderId} has sent you a friend request.</h5>
-      }
+        <h5 className='inlineBlock'>User # {props.info.senderId} has sent you a friend request.</h5>
+        <div className='friendReqButtons'>
+        	<Button id="confirm" className='button'>confrim</Button>
+        	<Button id="deny" className='button marginLeft10'>deny</Button>
+        </div> 
     </div>
   )
 }
