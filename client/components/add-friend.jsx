@@ -1,28 +1,37 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Button} from 'react-bootstrap'
-import {makeFriendRequest} from '../store'
+import {makeFriendRequest, resetFriendMessage} from '../store'
+import FriendsList from './friends-list.jsx'
 
 /**
  * COMPONENT
  */
-const AddFriend = (props) => {
-  const {user, requestResult} = props
 
-  return (
-    <div>
-      <form onSubmit={(evt) => {props.handleSubmit(evt, user.id)}} >
-        <div>
-          <label htmlFor='email'><small>Friend's Email</small></label>
-          <input className='friendInput' name='email' type='text' />
-          <div />
-          <Button type='submit' className='button'>Request Friend</Button>
-        </div>
-        {requestResult &&  <div> {requestResult} </div>}
-      </form>
-    </div>
-  )
+class AddFriend extends Component {
+  componentDidMount () {
+    this.props.handleReset()
+  }
+
+  render () {
+    const {user, requestResult, handleSubmit} = this.props
+
+    return (
+      <div>
+        <form onSubmit={(evt) => {handleSubmit(evt, user.id)}} >
+          <div>
+            <label htmlFor='email'><small>Friend's Email</small></label>
+            <input className='friendInput' name='email' type='text' />
+            <div />
+            <Button type='submit' className='button'>Request Friend</Button>
+          </div>
+          {requestResult &&  <div> {requestResult} </div>}
+        </form>
+        <FriendsList />
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = function(state) {
@@ -38,6 +47,9 @@ const mapDispatch = (dispatch) => {
       evt.preventDefault()
       const email = evt.target.email.value
       dispatch(makeFriendRequest(email, userId))
+    },
+    handleReset (){
+      dispatch(resetFriendMessage())
     }
   }
 }

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, FriendRequest} = require('../db/models')
+const {User, FriendRequest, Friend} = require('../db/models')
 const socket = require('../socket')
 
 module.exports = router
@@ -14,13 +14,20 @@ router.post('/', (req, res, next) => {
       if(recipient.id === senderId) {
         res.json(['self-user-failure'])
       } else {
-        FriendRequest.create({userId: recipient.id, senderId})
-        .then(result => {
-          res.json(['success', recipient])
-        })
-        .catch(error => {
-          res.send([error.name])
-          //Should be 'SequelizeUniqueConstraintError'
+        Friend.findOne({where: {userId: recipient.id, friendId: senderId}})
+        .then(hasFriendship => {
+          if(hasFriendship === null){
+            FriendRequest.create({userId: recipient.id, senderId})
+            .then(result => {
+              res.json(['success', recipient])
+            })
+            .catch(error => {
+              res.send([error.name])
+              //Should be 'SequelizeUniqueConstraintError'
+            })
+          } else {
+            res.json(['already-friends'])
+          }
         })
       }
     }

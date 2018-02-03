@@ -2,9 +2,13 @@ const User = require('./user')
 const Story = require('./story')
 const Chapter = require('./chapter')
 const FriendRequest = require('./friendRequest')
+const Friend = require('./friend')
 
-User.belongsToMany(User, {as: 'friend', through: 'friends'})
+User.belongsToMany(User, {as: 'friend', through: Friend})
 User.belongsToMany(User, {as: 'sender', through: FriendRequest})
+
+FriendRequest.belongsTo(User, {as: 'sender'})
+Friend.belongsTo(User, {as: 'friend'})
 
 Story.belongsTo(User)
 
@@ -15,5 +19,6 @@ module.exports = {
   User,
   Story,
   Chapter,
-  FriendRequest
+  FriendRequest,
+  Friend
 }

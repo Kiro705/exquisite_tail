@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_NOTIFICATIONS = 'GET_NOTIFICATIONS'
+const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION'
 
 /**
  * INITIAL STATE
@@ -16,6 +17,7 @@ const notifications = []
  */
 
 const getNotificationsActions = (notifications) => ({type: GET_NOTIFICATIONS, notifications})
+export const deleteNotification = (keyPropArray) => ({type: DELETE_NOTIFICATION, keyPropArray})
 
 // //THUNKS
 export function getNotifications(userId){
@@ -36,6 +38,14 @@ export default function (state = notifications, action) {
 	switch (action.type) {
 	case GET_NOTIFICATIONS:
 		return action.notifications
+	case DELETE_NOTIFICATION:
+		return state.filter(notification => {
+			if(notification[action.key] === action.prop){
+				return false
+			} else {
+				return true
+			}
+		})
 	default:
 		return state
 	}

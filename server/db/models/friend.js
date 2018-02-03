@@ -2,6 +2,6 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const User = require('./user')
 
-const FriendRequest = db.define('friendRequest', {})
+const Friend = db.define('friendship', {})
 
-module.exports = FriendRequest
+module.exports = Friend

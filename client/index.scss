@@ -102,6 +102,12 @@ body {
   padding: 0 20px 20px 20px;
 }
 
+.friendsList {
+  background-color: $mainColorLight;
+  margin: 20px;
+  padding: 5px 10px 0px 10px;
+}
+
 .storyThumb {
   background-color: $mainColorLight;
   padding: 1px 8px;
@@ -144,4 +150,9 @@ body {
   border-radius: 5px;
   background-color: $mainColorLight;
   color: $accentColorLight;
+}
+
+.secretText {
+  color: $mainColorLight;
+  text-align: center;
 }
