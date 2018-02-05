@@ -19,12 +19,12 @@ const Main = (props) => {
       handleSocketUpdate(socket.id, user.id)
     }
   }
-
+  const imgURL = __dirname+'Exquisite_tail_logo.png'
   return (
     <div>
       <nav className='main-color-light'>
         <div>
-          <img className='title-logo' src='Exquisite_tail_logo.png' alt='Exquisite Tail Logo'/>
+          <img className='title-logo' src={imgURL} alt='Exquisite Tail Logo'/>
           <h1 className='title'>Exquisite Tail</h1>
         </div>
         {

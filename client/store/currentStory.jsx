@@ -43,11 +43,15 @@ export function updateStory(newData, storyId){
 
 export function fetchStory(storyId){
 	return function thunk (dispatch) {
-		console.log(storyId)
 		return axios.get(`/api/stories/${storyId}`)
 			.then(res => res.data)
 			.then(story => {
-				dispatch(fetchStoryAction(story))
+				if(story === null){
+					//No story matching this ID was found
+					dispatch(fetchStoryAction({title: null, id: storyId}))
+				} else {
+					dispatch(fetchStoryAction(story))
+				}
 			})
 			.catch(err => console.log(err))
 	}

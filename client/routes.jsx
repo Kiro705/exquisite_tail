@@ -23,7 +23,7 @@ class Routes extends Component {
           { 
             //We set the state after loading the user (line 64)
             !this.state ? 
-              <h1>LOADING...</h1> :
+              <h1 className='marginLeft10'>LOADING...</h1> :
               <Switch>
                 <Route path='/login' component={Login} />
                 <Route path='/signup' component={Signup} />
@@ -32,9 +32,9 @@ class Routes extends Component {
                     <Switch>
                       <Route path='/home' component={UserHome} />
                       <Route path='/beginTheStory' component={NewStory} />
-                      <Route path='/story/:storyId' component={SingleStory} />
                       <Route path='/friends' component={AddFriend} />
                       <Route path='/notifications' component={Notifications} />
+                      <Route path='/story/:storyId' component={SingleStory} />
                       <Redirect to='/home' />
                     </Switch>
                 }

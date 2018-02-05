@@ -14,6 +14,7 @@ Story.belongsTo(User)
 
 Chapter.belongsTo(User)
 Chapter.belongsTo(Story)
+Story.hasMany(Chapter, {as: 'content'})
 
 module.exports = {
   User,

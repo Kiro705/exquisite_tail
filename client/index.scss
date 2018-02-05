@@ -23,7 +23,7 @@ $accentColorLight: null;
   //this is a white and blue color pallet
   $mainColor: white;
   $mainColorLight: lightblue;
-  $accentColor: black;
+  $accentColor: #555;
   $accentColorLight: darkred;
 }
 
@@ -94,6 +94,10 @@ body {
   display: inline-block;
 }
 
+.margin0 {
+  margin: 0;
+}
+
 .marginLeft10 {
   margin-left: 10px;
 }
@@ -135,10 +139,27 @@ body {
   display: inline-block;
 }
 
+.chapterName {
+  margin-top: 0px;
+}
+
+.chapterForm {
+  padding: 0 10px;
+  margin: 0;
+  width: 100%
+}
+
 .chapterInput {
-  vertical-align: top;
-  width: 200px;
-  height: 100px;
+  margin: 0;
+  width: 100%;
+}
+
+textarea.form-control {
+  height: 180px;
+}
+
+.lightFont {
+  color: #aaa;
 }
 
 .notification {

@@ -35,7 +35,6 @@ export function postStory(story){
 			.then(res => res.data)
 			.then(newStory => {
 				dispatch(postStoryAction(newStory))
-				console.log(newStory, '!!!!!!!!!!')
 				history.push(`/story/${newStory.id}`)
 			})
 			.catch(err => console.log(err))

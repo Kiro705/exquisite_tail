@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Story, User} = require('../db/models')
+const {Story, User, Chapter} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -9,7 +9,9 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:storyId', (req, res, next) => {
-  Story.findById(req.params.storyId)
+  Story.findById(req.params.storyId, {
+    include: {model: Chapter, as: 'content'}
+  })
     .then(theStory => res.json(theStory))
     .catch(next)
 })
