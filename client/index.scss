@@ -114,6 +114,11 @@ body {
   margin-bottom: 10px
 }
 
+.authInput {
+  border: 2px $accentColor solid;
+  border-radius: 5px;
+}
+
 .storyInput {
   border: 2px $accentColor solid;
   border-radius: 5px;

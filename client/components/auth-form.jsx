@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {Button} from 'react-bootstrap'
 import socket from '../socket.js'
 
 /**
@@ -15,18 +16,18 @@ const AuthForm = (props) => {
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor='email'><small>Email</small></label>
-          <input name='email' type='text' />
+          <input className='authInput' name='email' type='text' />
         </div>
         <div>
           <label htmlFor='password'><small>Password</small></label>
-          <input name='password' type='password' />
+          <input className='authInput' name='password' type='password' />
         </div>
         <div>
-          <button type='submit'>{displayName}</button>
+          <Button type='submit' className='button'>{displayName}</Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href='/auth/google'>{displayName} with Google</a>
+      <a className='marginLeft10' href='/auth/google'>{displayName} with Google</a>
     </div>
   )
 }
