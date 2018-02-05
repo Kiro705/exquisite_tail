@@ -18,6 +18,14 @@ const Story = db.define('story', {
     type: Sequelize.INTEGER,
     defaultValue: 1
   },
+  currentWriter: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  writerId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
   public: {
   	type: Sequelize.BOOLEAN,
   	defaultValue: true

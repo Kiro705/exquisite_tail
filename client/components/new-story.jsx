@@ -14,7 +14,7 @@ function NewStory(props){
   return (
     <div>
       <h2>Starting the <i>tail</i>: {props.newStory.title}</h2>
-      <form id="newStoryForm" onSubmit={(evt) => {props.handleSubmit(evt, props.user.id)}}>
+      <form id="newStoryForm" onSubmit={(evt) => {props.handleSubmit(evt, props.user)}}>
         <div>
           <span>
             <h5>Title</h5>
@@ -70,12 +70,14 @@ function mapDispatchToProps (dispatch, ownProps){
     handleChapterAmount: function(evt){
       dispatch(writeChapterAmount(evt.target.value))
     },
-    handleSubmit: function(evt, userId){
+    handleSubmit: function(evt, user){
       evt.preventDefault();
       const title = evt.target.title.value
       const chapterLength = evt.target.chapterLength.value
       const chapterAmount = evt.target.chapterAmount.value
-      dispatch(postStory({title, chapterLength, chapterAmount}, userId))
+      const currentWriter = user.email
+      const writerId = user.id
+      dispatch(postStory({title, chapterLength, chapterAmount, currentWriter, writerId}))
     }
   }
 }

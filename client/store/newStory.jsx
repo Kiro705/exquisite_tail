@@ -29,12 +29,14 @@ export const writeChapterLength = (chapterLength) => ({type: WRITE_CHAPTER_LENGT
 export const writeChapterAmount = (chapterAmount) => ({type: WRITE_CHAPTER_AMOUNT, chapterAmount})
 
 // //THUNKS
-export function postStory(story, userId){
+export function postStory(story){
 	return function thunk (dispatch) {
-		return axios.post('/api/stories', {story, userId})
+		return axios.post('/api/stories', {story})
 			.then(res => res.data)
 			.then(newStory => {
 				dispatch(postStoryAction(newStory))
+				console.log(newStory, '!!!!!!!!!!')
+				history.push(`/story/${newStory.id}`)
 			})
 			.catch(err => console.log(err))
 	}
