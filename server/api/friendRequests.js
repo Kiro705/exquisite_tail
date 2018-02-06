@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const {User, FriendRequest, Friend} = require('../db/models')
-const socket = require('../socket')
 
 module.exports = router
 

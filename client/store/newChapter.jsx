@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import socket from '../socket.js'
 
 /**
  * ACTION TYPES
@@ -20,7 +21,7 @@ const newChapter = {
  * ACTION CREATORS
  */
 
-const postChapterAction = (chapter) => ({type: POST_CHAPTER, chapter})
+const postChapterAction = () => ({type: POST_CHAPTER})
 export const writeContent = (content) => ({type: WRITE_CONTENT, content})
 export const tagNextFriend = (nextArr) => ({type: TAG_NEXT_FRIEND, nextArr: [+nextArr[0], nextArr[1]]})
 
@@ -29,8 +30,11 @@ export function postChapter(content, nextArr, story, userId){
 	return function thunk (dispatch) {
 		return axios.post('/api/chapters', {content, nextArr, story, userId})
 			.then(res => res.data)
-			.then(newChapter => {
-				dispatch(postChapterAction(newChapter))
+			.then(nextUser => {
+				if(nextUser.socketId !== 'logged-out'){
+					socket.sendNotification(nextUser.socketId, nextUser.id)
+				}
+				dispatch(postChapterAction())
 				history.push(`/home/`)
 			})
 			.catch(err => console.log(err))
@@ -44,7 +48,7 @@ export default function (state = newChapter, action) {
 	switch (action.type) {
 	case POST_CHAPTER:
 		//reset state after chapter is created
-		return newStory
+		return newChapter
 	case WRITE_CONTENT:
 		return  Object.assign({}, state, {content: action.content})
 	case TAG_NEXT_FRIEND:

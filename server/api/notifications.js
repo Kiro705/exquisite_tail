@@ -9,7 +9,11 @@ router.get('/:userId', (req, res, next) => {
     include: [{model: User, as: 'sender', attributes: ['id', 'email']}]
   })
 
-  Promise.all([friendRequestPromise])
+  const currentWriterPromise = Story.findAll({
+    where: {writerId: req.params.userId},
+  })
+
+  Promise.all([friendRequestPromise, currentWriterPromise])
   .then(resultArr => {
     let singleResults = []
     resultArr.forEach(result => {

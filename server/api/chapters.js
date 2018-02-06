@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Story, User, Chapter} = require('../db/models')
+
 module.exports = router
 
 router.post('/', (req, res, next) => {
@@ -19,6 +20,9 @@ router.post('/', (req, res, next) => {
         newChapter.setStory(theStory)
       })
   	})
-    .then(newChapter => res.json(newChapter))
+    .then(result => {
+      User.findById(nextArr[0])
+      .then(nextUser => res.json(nextUser))
+    })
     .catch(next)
 })

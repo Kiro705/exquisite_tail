@@ -24,8 +24,9 @@ export function getNotifications(userId){
 	return function thunk (dispatch) {
 		return axios.get(`/api/notifications/${userId}`)
 			.then(res => res.data)
-			.then(notifications => 
+			.then(notifications => {
 				dispatch(getNotificationsActions(notifications))
+			}
 			)
 			.catch(err => console.log(err))
 	}

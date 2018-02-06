@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Col, Row} from 'react-bootstrap'
 import {getNotifications} from '../store'
 import NotiFriendRequest from './noti-friend-request.jsx'
+import NotiNextWriter from './noti-next-writer.jsx'
 
 /**
  * COMPONENT
@@ -26,7 +27,11 @@ class Notifications extends Component {
         			return(
         				<NotiFriendRequest key={index} info={notification} />
         			)
-        		} else {
+        		} else if(notification.hasOwnProperty('chapterAmount')) {
+              return(
+                <NotiNextWriter key={index} info={notification} />
+              )
+            } else {
         			console.log('UNKNOWN NOTIFICATION error')
         		}
         	})

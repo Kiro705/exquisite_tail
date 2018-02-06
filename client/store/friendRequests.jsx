@@ -41,7 +41,9 @@ export function makeFriendRequest(email, userId){
 				switch(requestResult[0]){
 					case 'success':
 						const recipient = requestResult[1]
-						socket.sendNotification(recipient.socketId, recipient.id)
+						if(recipient.socketId !== 'logged-out'){
+							socket.sendNotification(recipient.socketId, recipient.id)
+						}
 						dispatch(successAction())
 						break
 					case 'already-friends':
