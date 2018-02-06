@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Col, Row} from 'react-bootstrap'
-import {getUsersStories, getNotifications} from '../store'
+import {fetchMyStories, getNotifications} from '../store'
 import StoryContainer from './story-container.jsx'
 
 /**
@@ -20,10 +20,10 @@ class UserHome extends Component {
         <h3>Welcome, {this.props.user.email}</h3>
       </Col>
       <Col sm={6} xs={12}> 
-        <StoryContainer title='Authored Stories' stories={this.props.authoredStories} />
+        <StoryContainer title='Finished Stories' stories={this.props.stories.completed} />
       </Col>
       <Col sm={6} xs={12}> 
-        <StoryContainer title='Contributed Stories' stories={[]} />
+        <StoryContainer title='Stories in Progress' stories={this.props.stories.inProgress} />
       </Col>
     </Row>
   )
@@ -36,15 +36,14 @@ class UserHome extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
-    authoredStories: state.stories.authoredStories,
-    contribStories: state.stories.contribStories
+    stories: state.stories
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
     loadUserData(id) {
-      dispatch(getUsersStories(id))
+      dispatch(fetchMyStories(id))
       dispatch(getNotifications(id))
     }
   }

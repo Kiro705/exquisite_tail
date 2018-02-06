@@ -16,9 +16,20 @@ router.get('/:storyId', (req, res, next) => {
     .catch(next)
 })
 
-router.get('/myAuthoredStories/:userId', (req, res, next) => {
+router.get('/myStories/:userId', (req, res, next) => {
   Story.findAll({where: {userId: req.params.userId}})
-    .then(storyList => res.json(storyList))
+    .then(storyList => {
+      const finshedStories = []
+      const inProgressStories = []
+      storyList.forEach(story => {
+        if(story.chapterAmount < story.currentChapter){
+          finshedStories.push(story)
+        } else {
+          inProgressStories.push(story)
+        }
+      })
+      res.json({completed: finshedStories, inProgress: inProgressStories})
+    })
     .catch(next)
 })
 

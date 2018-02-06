@@ -4,31 +4,29 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_AUTHORED_STORIES = 'GET_AUTHORED_STORIES'
-const GET_CONTRIBUTED_STORIES = 'GET_CONTRIBUTED_STORIES'
+const FETCH_MY_STORIES = 'FETCH_MY_STORIES'
 
 /**
  * INITIAL STATE
  */
 const stories = {
-	authoredStories: [],
-	contribStories: []
+	completed: [],
+	inProgress: []
 }
 
 /**
  * ACTION CREATORS
  */
 
-const getAuthoredStoriesAction = (authoredStories) => ({type: GET_AUTHORED_STORIES, authoredStories})
-const getContributedStoriesAction = (contribStories) => ({type: GET_CONTRIBUTED_STORIES, contribStories})
+const getStoriesAction = (stories) => ({type: FETCH_MY_STORIES, stories})
 
 // //THUNKS
-export function getUsersStories(userId){
+export function fetchMyStories(userId){
 	return function thunk (dispatch) {
-		return axios.get(`/api/stories/myAuthoredStories/${userId}`)
+		return axios.get(`/api/stories/myStories/${userId}`)
 			.then(res => res.data)
-			.then(authoredStories => {
-				dispatch(getAuthoredStoriesAction(authoredStories))
+			.then(stories => {
+				dispatch(getStoriesAction(stories))
 			})
 			.catch(err => console.log(err))
 	}
@@ -39,8 +37,8 @@ export function getUsersStories(userId){
  */
 export default function (state = stories, action) {
 	switch (action.type) {
-	case GET_AUTHORED_STORIES:
-		return Object.assign({}, state, {authoredStories: action.authoredStories})
+	case FETCH_MY_STORIES:
+		return Object.assign({}, state, action.stories)
 	default:
 		return state
 	}
