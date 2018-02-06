@@ -178,6 +178,11 @@ textarea.form-control {
   color: $accentColorLight;
 }
 
+.invalidForm {
+  background-color: lightgray;
+  color: gray;
+}
+
 .secretText {
   color: $mainColorLight;
   text-align: center;

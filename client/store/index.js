@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import user from './user.jsx'
 import newStory from './newStory.jsx'
 import newChapter from './newChapter.jsx'
+import chapterSubmit from './chapterSubmit.jsx'
 import stories from './stories.jsx'
 import friendRequests from './friendRequests.jsx'
 import notifications from './notifications.jsx'
@@ -14,6 +15,7 @@ const reducer = combineReducers({
 	user,
  	newStory,
  	newChapter,
+ 	chapterSubmit,
  	stories,
  	friendRequests,
  	notifications,
@@ -27,6 +29,7 @@ export default store
 export * from './user.jsx'
 export * from './newStory.jsx'
 export * from './newChapter.jsx'
+export * from './chapterSubmit.jsx'
 export * from './stories.jsx'
 export * from './friendRequests.jsx'
 export * from './notifications.jsx'

@@ -3,16 +3,17 @@ const {Story, User, Chapter} = require('../db/models')
 module.exports = router
 
 router.post('/', (req, res, next) => {
-  Chapter.create(req.body.chapter)
+  const {content, nextArr, story, userId} = req.body
+  Chapter.create({content, place: story.currentChapter})
   	.then(newChapter => {
-  		User.findById(req.body.userId)
+  		User.findById(userId)
   		.then(author => {
   			newChapter.setUser(author)
   		})
-      Story.findById(req.body.storyId)
+      Story.findById(story.id)
       .then(theStory => {
         const nextChapter = theStory.currentChapter + 1
-        theStory.update({currentChapter: nextChapter})
+        return theStory.update({currentChapter: nextChapter, currentWriter: nextArr[1], writerId: nextArr[0]})
       })
       .then(theStory => {
         newChapter.setStory(theStory)
