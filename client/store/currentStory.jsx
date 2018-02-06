@@ -41,9 +41,9 @@ export function updateStory(newData, storyId){
 	}
 }
 
-export function fetchStory(storyId){
+export function fetchStory(storyId, userId){
 	return function thunk (dispatch) {
-		return axios.get(`/api/stories/${storyId}`)
+		return axios.get(`/api/stories/${storyId}/${userId}`)
 			.then(res => res.data)
 			.then(story => {
 				if(story === null){

@@ -31,7 +31,7 @@ export function postChapter(content, nextArr, story, userId){
 		return axios.post('/api/chapters', {content, nextArr, story, userId})
 			.then(res => res.data)
 			.then(nextUser => {
-				if(nextUser.socketId !== 'logged-out'){
+				if(nextUser && nextUser.socketId !== 'logged-out'){
 					socket.sendNotification(nextUser.socketId, nextUser.id)
 				}
 				dispatch(postChapterAction())

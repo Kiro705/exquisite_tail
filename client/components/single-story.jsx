@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 import {Col, Row} from 'react-bootstrap'
 import {fetchStory, getFriends} from '../store'
 import NewChapter from './new-chapter.jsx'
+import StoryCompleted from './story-completed.jsx'
+import StoryInProgress from './story-in-progress.jsx'
 
 class SingleTrip extends Component {
 
@@ -15,20 +17,19 @@ class SingleTrip extends Component {
 
 	render () {
 		const {user, story, friends} = this.props
+
 		if(story.id === 0){
 			return(<h1 className='marginLeft10'>LOADING...</h1>)
+		} else if(story.title === null){
+			return(<h3 className='marginLeft10'>No story matching ID {story.id} was found.</h3>)
+		} else if(story.currentWriter === 'story-is-hidden'){
+			return(<h3 className='marginLeft10'>This story is hidden from you.</h3>)
+		} else if(story.writerId === user.id) {
+			return(<NewChapter story={story} friends={friends} />)
+		} else if(story.currentWriter === 'story-finished') {
+			return(<StoryCompleted story={story} />)
 		} else {
-			if(story.title === null){
-				return(<h3 className='marginLeft10'>No story matching ID {story.id} was found.</h3>)
-			} else {
-				if(story.writerId === user.id){
-					return(<div>
-						<NewChapter story={story} friends={friends} />
-					</div>)
-				} else {
-					return(<div>something</div>)
-				}
-			}
+			return(<StoryInProgress story={story} />)
 		}
 	}
 }
@@ -47,7 +48,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
 	return {
 		loadStory (storyId, userId) {
-			dispatch(fetchStory(storyId))
+			dispatch(fetchStory(storyId, userId))
 			dispatch(getFriends(userId))
 		}
 	}
