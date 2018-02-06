@@ -8,6 +8,24 @@ module.exports = router
 //     .catch(next)
 // })
 
+router.get('/myStories/:userId', (req, res, next) => {
+  const userId = req.params.userId
+  Story.findAll({where: {userId}})
+    .then(storyList => {
+      const finshedStories = []
+      const inProgressStories = []
+      storyList.forEach(story => {
+        if(story.chapterAmount < story.currentChapter){
+          finshedStories.push(story)
+        } else {
+          inProgressStories.push(story)
+        }
+      })
+      res.json({completed: finshedStories, inProgress: inProgressStories})
+    })
+    .catch(next)
+})
+
 router.get('/:storyId/:userId', (req, res, next) => {
   const userId = +req.params.userId
   const storyId = +req.params.storyId
@@ -46,23 +64,6 @@ router.get('/:storyId/:userId', (req, res, next) => {
           }
         }
       }
-    })
-    .catch(next)
-})
-
-router.get('/myStories/:userId', (req, res, next) => {
-  Story.findAll({where: {userId: req.params.userId}})
-    .then(storyList => {
-      const finshedStories = []
-      const inProgressStories = []
-      storyList.forEach(story => {
-        if(story.chapterAmount < story.currentChapter){
-          finshedStories.push(story)
-        } else {
-          inProgressStories.push(story)
-        }
-      })
-      res.json({completed: finshedStories, inProgress: inProgressStories})
     })
     .catch(next)
 })

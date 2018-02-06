@@ -1,5 +1,6 @@
 import React from 'react'
-import {Col, Row} from 'react-bootstrap'
+import {Col, Row, Button} from 'react-bootstrap'
+import history from '../history'
 
 /**
  * COMPONENT
@@ -13,6 +14,11 @@ export default function ContributedStories(props){
           return (
             <Col key={story.id} className='storyThumb' xs={12} >
               <h5>{story.title}</h5>
+              <Button 
+                id="confirm"
+                className='button'
+                onClick={() => {history.push(`/story/${story.id}`)}}
+              >View</Button>
               <Row>
                 <Col xs={6} >
                   <h6>Chapter Amount: {story.chapterAmount}</h6>
