@@ -13,8 +13,9 @@ export default function StoryCompleted(props){
         	story.content.map(chapter => {
         		return(
         			<div key={chapter.id} className='chapterContainer'>
-        				<h4 className='font-color-light'>Chapter {chapter.place}</h4>
-        				<h5 className='padding-left-15'>{chapter.content}</h5>
+        				<h3 className='font-color-light inlineBlock margin0'>Chapter {chapter.place}</h3>
+                        <p className='inlineBlock padding-left-15'><i>by: {chapter.user.email}</i></p>
+        				<h4 className='padding-left-15'>{chapter.content}</h4>
         			</div>
         		)
         	})

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap'
-import {writeContent, tagNextFriend, postChapter, chapterSuccessAction, noContentAction, noNextAction} from '../store'
+import {writeContent, tagNextFriend, postChapter, chapterSuccessAction, noContentAction, tooMuchContentAction, noNextAction} from '../store'
 import SingleChapter from './single-chapter.jsx'
 
 const mapStateToProps = function(state) {
@@ -24,7 +24,7 @@ function NewChapter(props){
 
   let formStatus = 'invalidForm'
   let nextFriendIdString = newChapter.nextFriendInfo[0]
-  if(newChapter.content.length > 0 && (nextFriendIdString > 0 || textMessage === 'Conclude the story...')){
+  if((newChapter.content.length > 0 && newChapter.content.length <= story.chapterLength) && (nextFriendIdString > 0 || textMessage === 'Conclude the story...')){
     formStatus = 'validForm'
   }
 
@@ -32,8 +32,8 @@ function NewChapter(props){
   return (
     <div>
       <h2>The <i>tail</i>: {story.title}</h2>
-      <h3 className='marginLeft10 chapterName'>Chapter {story.currentChapter}</h3>
       {story.currentChapter > 1 ? <SingleChapter info={story.content[0]} /> : <div />}
+      <h3 className='marginLeft10 chapterName'>Chapter {story.currentChapter}</h3>
       <form className='chapterForm' onSubmit={(evt) => {handleSubmit(evt, user.id, story)}}>
         <FormGroup className='chapterInput' controlId="formControlsTextarea">
           <FormControl
@@ -90,6 +90,8 @@ function mapDispatchToProps (dispatch, ownProps){
       }
       if(content.length < 1){
         dispatch(noContentAction())
+      } else if(content.length > story.chapterLength){
+        dispatch(tooMuchContentAction())
       } else {
         if(nextArr[0] === 0){
           dispatch(noNextAction())

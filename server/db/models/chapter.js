@@ -3,7 +3,7 @@ const db = require('../db')
 
 const Chapter = db.define('chapter', {
   content: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   place: {

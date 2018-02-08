@@ -7,9 +7,9 @@ export default function SingleChapter(props){
 	const {info} = props
   return (
 		<div className='notification'>
-        <h3 className='inlineBlock'>Chapter {info.place}</h3>
-        <p>{info.content}</p>
-        <p>Author info here</p>
+        <h3 className='inlineBlock'>Chapter {info.place}    </h3>
+        <p className='inlineBlock padding-left-15'><i>by: {info.user.email}</i></p>
+        <p className='padding-left-15'>{info.content}</p>
     </div>
   )
 }

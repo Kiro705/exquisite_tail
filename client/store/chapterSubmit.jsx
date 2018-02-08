@@ -7,6 +7,7 @@ import socket from '../socket.js'
  */
 const CHAPTER_SUCCESS = 'CHAPTER_SUCCESS'
 const CHAPTER_NO_CONTENT = 'CHAPTER_NO_CONTENT'
+const CHAPTER_TOO_MUCH_CONTENT = 'CHAPTER_TOO_MUCH_CONTENT'
 const CHAPTER_NO_NEXT = 'CHAPTER_NO_NEXT'
 const RESET_CHAPTER_MESSAGE = 'RESET_CHAPTER_MESSAGE'
 
@@ -23,6 +24,7 @@ const chapterMessage = {
 
 export const chapterSuccessAction = () => ({type: CHAPTER_SUCCESS})
 export const noContentAction = () => ({type: CHAPTER_NO_CONTENT})
+export const tooMuchContentAction = () => ({type: CHAPTER_TOO_MUCH_CONTENT})
 export const noNextAction = () => ({type: CHAPTER_NO_NEXT})
 export const resetChapterMessage = () => ({type: RESET_CHAPTER_MESSAGE})
 
@@ -36,6 +38,8 @@ export default function (state = chapterMessage, action) {
 		return Object.assign({}, state, {result: null})
 	case CHAPTER_NO_CONTENT:
 		return Object.assign({}, state, {result: 'You need to write something!'})
+	case CHAPTER_TOO_MUCH_CONTENT:
+		return Object.assign({}, state, {result: "You've exceeded the content limit."})
 	case CHAPTER_NO_NEXT:
 		return Object.assign({}, state, {result: "You forgot select who's next!"})
 	case RESET_CHAPTER_MESSAGE:

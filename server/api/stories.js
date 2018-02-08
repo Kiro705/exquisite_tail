@@ -10,20 +10,39 @@ module.exports = router
 
 router.get('/myStories/:userId', (req, res, next) => {
   const userId = req.params.userId
-  Story.findAll({where: {userId}})
-    .then(storyList => {
+  Chapter.findAll({where: {userId}, include: {model: Story}})
+    .then(chapterList => {
+      const storyMemo = {}
       const finshedStories = []
       const inProgressStories = []
-      storyList.forEach(story => {
-        if(story.chapterAmount < story.currentChapter){
-          finshedStories.push(story)
-        } else {
-          inProgressStories.push(story)
+      chapterList.forEach(chapter => {
+        let theStory = chapter.story
+        if(!storyMemo[theStory.id]){
+          storyMemo[theStory.id] = true
+          if(theStory.chapterAmount < theStory.currentChapter){
+            finshedStories.push(theStory)
+          } else {
+            inProgressStories.push(theStory)
+          }
         }
       })
       res.json({completed: finshedStories, inProgress: inProgressStories})
     })
     .catch(next)
+  // Story.findAll({where: {userId}})
+  //   .then(storyList => {
+  //     const finshedStories = []
+  //     const inProgressStories = []
+  //     storyList.forEach(story => {
+  //       if(story.chapterAmount < story.currentChapter){
+  //         finshedStories.push(story)
+  //       } else {
+  //         inProgressStories.push(story)
+  //       }
+  //     })
+  //     res.json({completed: finshedStories, inProgress: inProgressStories})
+  //   })
+  //   .catch(next)
 })
 
 router.get('/:storyId/:userId', (req, res, next) => {
@@ -48,11 +67,11 @@ router.get('/:storyId/:userId', (req, res, next) => {
               let tempContent = null
               theStory.content.forEach(chapter => {
                 if(chapter.place === theStory.currentChapter - 1) {
-                  tempContent = chapter.content
+                  tempContent = [chapter]
                 }
               })
-              theStory.content = tempContent
-              res.json(theStory)
+              const editedStory = {id: theStory.id, title: theStory.title, content: tempContent, currentChapter: theStory.currentChapter, chapterLength: theStory.chapterLength, chapterAmount: theStory.chapterAmount, writerId: theStory.writerId, currentWriter: theStory.currentWriter, userId: theStory.userId}
+              res.json(editedStory)
             } else if(theStory.currentWriter === 'story-finished') {
               res.json(theStory)
             } else {
