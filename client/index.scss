@@ -94,6 +94,10 @@ body {
   display: inline-block;
 }
 
+.inline {
+  display: inline;
+}
+
 .margin0 {
   margin: 0;
 }
@@ -118,6 +122,12 @@ body {
   margin-bottom: 10px
 }
 
+#finishedStories .storyThumb {
+  background-color: #ccff99;
+  padding: 1px 8px;
+  margin-bottom: 10px
+}
+
 .authInput {
   border: 2px $accentColor solid;
   border-radius: 5px;
@@ -131,12 +141,6 @@ body {
 .friendInput {
   border: 2px $accentColor solid;
   border-radius: 5px;
-}
-
-.friendReqButtons {
-  margin-top: 10px;
-  float: right;
-  display: inline-block;
 }
 
 .chapterName {
@@ -164,10 +168,20 @@ textarea.form-control {
 
 .notification {
   background-color: $mainColorLight;
-  padding: 1px 8px;
+  padding: 8px;
   margin-bottom: 10px;
-  height: 80px;
-  width: 90%;
+}
+
+.notiRow {
+  margin: 0;
+}
+
+.notiMessageRow {
+  margin: 0 0 8px 0;
+}
+
+.notiButtons {
+  float: right;
 }
 
 .button {
@@ -178,9 +192,30 @@ textarea.form-control {
   color: $accentColorLight;
 }
 
+.viewStoryButton {
+  font-size: 12px;
+  border: 2px $accentColor solid;
+  border-radius: 5px;
+  background-color: $mainColorLight;
+  color: $accentColorLight;
+  margin: 10px;
+  float: right;
+}
+
+#finishedStories .viewStoryButton{
+  background-color: #99ff66;
+}
+
 .invalidForm {
   background-color: lightgray;
   color: gray;
+}
+
+.storyView {
+  background-color: $mainColor;
+  padding: 1px 8px;
+  margin-bottom: 10px;
+  height: 80px;
 }
 
 .secretText {

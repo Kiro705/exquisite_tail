@@ -19,10 +19,10 @@ class UserHome extends Component {
       <Col xs={12}>
         <h3>Welcome, {this.props.user.email}</h3>
       </Col>
-      <Col sm={6} xs={12}> 
+      <Col id='finishedStories' sm={6} xs={12}> 
         <StoryContainer title='Finished Stories' stories={this.props.stories.completed} />
       </Col>
-      <Col sm={6} xs={12}> 
+      <Col id='storiesInProgress' sm={6} xs={12}> 
         <StoryContainer title='Stories in Progress' stories={this.props.stories.inProgress} />
       </Col>
     </Row>

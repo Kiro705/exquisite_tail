@@ -21,7 +21,7 @@ router.get('/:userId', (req, res, next) => {
     })
 
     const sortFunc = function(a, b) {
-      return a.createdAt - b.createdAt
+      return b.createdAt - a.createdAt
     }
     
     singleResults.sort(sortFunc)

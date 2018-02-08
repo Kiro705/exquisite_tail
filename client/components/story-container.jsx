@@ -13,12 +13,17 @@ export default function ContributedStories(props){
         props.stories.map(story => {
           return (
             <Col key={story.id} className='storyThumb' xs={12} >
-              <h5>{story.title}</h5>
-              <Button 
-                id="confirm"
-                className='button'
-                onClick={() => {history.push(`/story/${story.id}`)}}
-              >View</Button>
+              <Row>
+              <Col xs={6} >
+                <h5>{story.title}</h5>
+              </Col>
+              <Col xs={6} >
+                <Button 
+                  className='viewStoryButton'
+                  onClick={() => {history.push(`/story/${story.id}`)}}
+                >View</Button>
+              </Col>
+              </Row>
               <Row>
                 <Col xs={6} >
                   <h6>Chapter Amount: {story.chapterAmount}</h6>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Button} from 'react-bootstrap'
+import {Button, Row, Col} from 'react-bootstrap'
 import {confirmFriendRequest, rejectFriendRequest} from '../store'
 
 /**
@@ -11,8 +11,11 @@ function NotiFriendRequest(props){
 	const sender = info.sender
   return (
 		<div className='notification'>
-        <h5 className='inlineBlock'>{sender.email} has sent you a friend request.</h5>
-        <div className='friendReqButtons'>
+      <Row className='notiMessageRow'>
+        <h5 className='inline'>{sender.email} has sent you a friend request.</h5>
+      </Row>
+      <Row className='notiRow'>
+        <div className='notiButtons'>
         	<Button 
         		id="confirm"
         		className='button'
@@ -28,6 +31,7 @@ function NotiFriendRequest(props){
             }}
         	>deny</Button>
         </div> 
+      </Row>
     </div>
   )
 }
