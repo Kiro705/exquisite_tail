@@ -106,6 +106,10 @@ body {
   margin-left: 10px;
 }
 
+.padding-left-15 {
+  padding-left: 15px
+}
+
 .storyList {
   padding: 0 20px 20px 20px;
 }
@@ -216,6 +220,18 @@ textarea.form-control {
   padding: 1px 8px;
   margin-bottom: 10px;
   height: 80px;
+}
+
+.storyTitle {
+  background-color: $accentColorLight;
+  padding: 20px;
+  color: white;
+  display: block;
+}
+
+.chapterContainer {
+  background-color: $mainColorLight;
+  padding: 10px;
 }
 
 .secretText {
