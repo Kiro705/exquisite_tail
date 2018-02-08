@@ -22,14 +22,14 @@ function NotiFriendRequest(props){
         		onClick={() => {
         			handleConfirm(user.id, sender.id)
         		}}
-        	>confrim</Button>
+        	>Confirm</Button>
         	<Button 
         		id="deny"
         		className='button marginLeft10'
         		onClick={() => {
               handleReject(user.id, sender.id)
             }}
-        	>deny</Button>
+        	>Deny</Button>
         </div> 
       </Row>
     </div>

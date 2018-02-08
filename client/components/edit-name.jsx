@@ -24,7 +24,7 @@ function EditName(props){
             name="nickname"
           />
         </div>
-        <Button type="submit" id="submit" className='button'>Confrim Changes</Button>
+        <Button type="submit" id="submit" className='button'>Confirm Changes</Button>
       </form>
     </div>
   )
