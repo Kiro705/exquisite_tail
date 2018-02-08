@@ -22,7 +22,14 @@ const reducer = combineReducers({
  	friends,
  	currentStory
  })
-const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
+
+const middlewareArray = [thunkMiddleware];
+const isLocal = ~location.href.indexOf('://localhost');
+if (isLocal !== 0) {
+  middlewareArray.push(createLogger({collapsed: true}));
+}
+const middleware = applyMiddleware.apply(null, middlewareArray)
+
 const store = createStore(reducer, middleware)
 
 export default store

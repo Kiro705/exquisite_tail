@@ -13,7 +13,7 @@ socket.updateFriends = function(socketId, userId){
 }
 
 socket.on('connect', () => {
-  console.log('Connected!')
+  //console.log('Connected!')
 })
 
 socket.on('recievedNotification', function(userId){
