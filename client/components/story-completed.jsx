@@ -14,7 +14,7 @@ export default function StoryCompleted(props){
         		return(
         			<div key={chapter.id} className='chapterContainer'>
         				<h3 className='font-color-light inlineBlock margin0'>Chapter {chapter.place}</h3>
-                        <p className='inlineBlock padding-left-15'><i>by: {chapter.user.email}</i></p>
+                        <p className='inlineBlock padding-left-15'><i>{chapter.user.nickname ? `by: ${chapter.user.nickname}` : `by: ${chapter.user.email}`}</i></p>
         				<h4 className='padding-left-15'>{chapter.content}</h4>
         			</div>
         		)

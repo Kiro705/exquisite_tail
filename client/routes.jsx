@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, NewStory, AddFriend, Notifications, SingleStory} from './components'
+import {Main, Login, Signup, UserHome, NewStory, AddFriend, Notifications, SingleStory, EditName} from './components'
 import {me} from './store'
 
 /**
@@ -34,6 +34,7 @@ class Routes extends Component {
                       <Route path='/beginTheStory' component={NewStory} />
                       <Route path='/friends' component={AddFriend} />
                       <Route path='/notifications' component={Notifications} />
+                      <Route path='/edit-name' component={EditName} />
                       <Route path='/story/:storyId' component={SingleStory} />
                       <Redirect to='/home' />
                     </Switch>

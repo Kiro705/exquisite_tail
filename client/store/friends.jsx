@@ -58,9 +58,9 @@ export function rejectFriendRequest(userId, senderId){
 	return function thunk (dispatch) {
 		return axios.put(`/api/friends/reject`, {userId, senderId})
 			.then(res => res.data)
-			.then(senderObj => {
+			.then(senderArray => {
 				dispatch(rejectAction())
-				dispatch(deleteNotification(senderObj))
+				dispatch(deleteNotification(senderArray))
 			})
 			.catch(err => console.log(err))
 	}

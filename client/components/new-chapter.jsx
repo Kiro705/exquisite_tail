@@ -59,7 +59,11 @@ function NewChapter(props){
                 <option value={[0,'']}>Add some friends first!</option>
               }
               {friends.map((friend, index) => {
-                return( <option key={index} value={[friend.id, friend.email]}>{friend.email}</option> )
+                if(friend.nickname){
+                  return( <option key={index} value={[friend.id, friend.nickname]}>{friend.nickname}</option> )
+                } else {
+                  return( <option key={index} value={[friend.id, friend.email]}>{friend.email}</option> )
+                }
               })}
             </FormControl>
           </FormGroup>
@@ -84,7 +88,7 @@ function mapDispatchToProps (dispatch, ownProps){
       const content = evt.target.content.value
       let nextArr 
       if(story.currentChapter === story.chapterAmount){
-        nextArr = [-1, 'story-finished']
+        nextArr = [-1, null, 'story-finished']
       } else {
         nextArr = evt.target.nextUser.value.split(',')
       }

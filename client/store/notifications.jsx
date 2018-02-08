@@ -40,13 +40,15 @@ export default function (state = notifications, action) {
 	case GET_NOTIFICATIONS:
 		return action.notifications
 	case DELETE_NOTIFICATION:
-		return state.filter(notification => {
-			if(notification[action.key] === action.prop){
+		const newState = state.filter(notification => {
+			let array = action.keyPropArray
+			if(notification[array[0]] === array[1]){
 				return false
 			} else {
 				return true
 			}
 		})
+		return newState
 	default:
 		return state
 	}

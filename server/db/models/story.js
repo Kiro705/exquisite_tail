@@ -20,11 +20,14 @@ const Story = db.define('story', {
   },
   currentWriter: {
     type: Sequelize.STRING,
-    allowNull: false
   },
   writerId: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  status: {
+    type: Sequelize.STRING,
+    defaultValue: 'in-progress'
   },
   public: {
   	type: Sequelize.BOOLEAN,

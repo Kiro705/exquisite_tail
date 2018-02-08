@@ -19,6 +19,7 @@ const newStory = {
 	currentWriter: '',
 	writerId: 0,
 	public: true,
+	status: 'story-is-hidden',
 }
 
 /**

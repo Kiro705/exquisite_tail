@@ -5,7 +5,7 @@ module.exports = router
 router.get('/:userId', (req, res, next) => {
   Friend.findAll({
     where: {userId: req.params.userId},
-    include: [{model: User, as: 'friend', attributes: ['id', 'email']}]
+    include: [{model: User, as: 'friend', attributes: ['id', 'email', 'nickname']}]
   })
   .then(friendData => {
     let tempList = []
@@ -43,7 +43,7 @@ router.put('/reject', (req, res, next) => {
   FriendRequest.findOne({where: {userId: req.body.userId, senderId: req.body.senderId}})
   .then(request => request.destroy())
   .then(something => {
-    res.json({senderId: req.body.senderId})
+    res.json(['senderId', req.body.senderId])
   })
   .catch(next)
 })

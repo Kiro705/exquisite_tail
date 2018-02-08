@@ -14,7 +14,11 @@ router.post('/', (req, res, next) => {
       Story.findById(story.id)
       .then(theStory => {
         const nextChapter = theStory.currentChapter + 1
-        return theStory.update({currentChapter: nextChapter, currentWriter: nextArr[1], writerId: nextArr[0]})
+        if(nextArr[2]){
+          return theStory.update({currentChapter: nextChapter, currentWriter: nextArr[1], writerId: nextArr[0], status: nextArr[2]})
+        } else {
+          return theStory.update({currentChapter: nextChapter, currentWriter: nextArr[1], writerId: nextArr[0]})
+        }
       })
       .then(theStory => {
         newChapter.setStory(theStory)

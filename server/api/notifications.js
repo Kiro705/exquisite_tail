@@ -6,7 +6,7 @@ router.get('/:userId', (req, res, next) => {
 
   const friendRequestPromise = FriendRequest.findAll({
     where: {userId: req.params.userId},
-    include: [{model: User, as: 'sender', attributes: ['id', 'email']}]
+    include: [{model: User, as: 'sender', attributes: ['id', 'email', 'nickname']}]
   })
 
   const currentWriterPromise = Story.findAll({

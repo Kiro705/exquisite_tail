@@ -19,7 +19,11 @@ class FriendsList extends Component {
           <ul>
            {
             friends.map((friend, index) => {
-              return(<h5 key={index}>{friend.email}</h5>)
+              if(friend.nickname){
+                return(<h5 key={index}>> {friend.nickname} ({friend.email})</h5>)
+              } else {
+                return(<h5 key={index}>> {friend.email}</h5>)
+              }
             })
            }
           </ul>

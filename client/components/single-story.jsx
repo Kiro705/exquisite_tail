@@ -22,11 +22,11 @@ class SingleTrip extends Component {
 			return(<h1 className='marginLeft10'>LOADING...</h1>)
 		} else if(story.title === null){
 			return(<h3 className='marginLeft10'>No story matching ID {story.id} was found.</h3>)
-		} else if(story.currentWriter === 'story-is-hidden'){
+		} else if(story.status === 'story-is-hidden'){
 			return(<h3 className='marginLeft10'>This story is hidden from you.</h3>)
 		} else if(story.writerId === user.id) {
 			return(<NewChapter story={story} friends={friends} />)
-		} else if(story.currentWriter === 'story-finished') {
+		} else if(story.status === 'story-finished') {
 			return(<StoryCompleted story={story} />)
 		} else {
 			return(<StoryInProgress story={story} />)

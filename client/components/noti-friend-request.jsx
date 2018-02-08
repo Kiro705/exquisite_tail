@@ -12,7 +12,7 @@ function NotiFriendRequest(props){
   return (
 		<div className='notification'>
       <Row className='notiMessageRow'>
-        <h5 className='inline'>{sender.email} has sent you a friend request.</h5>
+        <h5 className='inline'>{sender.nickname ? `${sender.nickname} (${sender.email})` : sender.email} has sent you a friend request.</h5>
       </Row>
       <Row className='notiRow'>
         <div className='notiButtons'>

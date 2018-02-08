@@ -29,20 +29,6 @@ router.get('/myStories/:userId', (req, res, next) => {
       res.json({completed: finshedStories, inProgress: inProgressStories})
     })
     .catch(next)
-  // Story.findAll({where: {userId}})
-  //   .then(storyList => {
-  //     const finshedStories = []
-  //     const inProgressStories = []
-  //     storyList.forEach(story => {
-  //       if(story.chapterAmount < story.currentChapter){
-  //         finshedStories.push(story)
-  //       } else {
-  //         inProgressStories.push(story)
-  //       }
-  //     })
-  //     res.json({completed: finshedStories, inProgress: inProgressStories})
-  //   })
-  //   .catch(next)
 })
 
 router.get('/:storyId/:userId', (req, res, next) => {
@@ -70,16 +56,16 @@ router.get('/:storyId/:userId', (req, res, next) => {
                   tempContent = [chapter]
                 }
               })
-              const editedStory = {id: theStory.id, title: theStory.title, content: tempContent, currentChapter: theStory.currentChapter, chapterLength: theStory.chapterLength, chapterAmount: theStory.chapterAmount, writerId: theStory.writerId, currentWriter: theStory.currentWriter, userId: theStory.userId}
+              const editedStory = {id: theStory.id, title: theStory.title, content: tempContent, currentChapter: theStory.currentChapter, chapterLength: theStory.chapterLength, chapterAmount: theStory.chapterAmount, writerId: theStory.writerId, currentWriter: theStory.currentWriter, userId: theStory.userId, status: theStory.status}
               res.json(editedStory)
-            } else if(theStory.currentWriter === 'story-finished') {
+            } else if(theStory.status === 'story-finished') {
               res.json(theStory)
             } else {
               theStory.content = null
               res.json(theStory)
             }
           } else {
-            res.json({id: -1, currentWriter: 'story-is-hidden'})
+            res.json({id: -1, status: 'story-is-hidden'})
           }
         }
       }

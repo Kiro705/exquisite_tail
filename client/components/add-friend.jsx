@@ -21,8 +21,8 @@ class AddFriend extends Component {
       <div>
         <form onSubmit={(evt) => {handleSubmit(evt, user.id)}} >
           <div>
-            <label htmlFor='email'><small>Friend's Email</small></label>
-            <input className='friendInput' name='email' type='text' />
+            <label htmlFor='email'>Add a Friend</label>
+            <input className='friendInput' name='email' type='text' placeholder="friend's email" />
             <div />
             <Button type='submit' className='button'>Request Friend</Button>
           </div>
