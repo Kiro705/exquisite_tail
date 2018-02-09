@@ -97,7 +97,7 @@ function mapDispatchToProps (dispatch, ownProps){
       } else if(content.length > story.chapterLength){
         dispatch(tooMuchContentAction())
       } else {
-        if(nextArr[0] === 0){
+        if(+nextArr[0] === 0){
           dispatch(noNextAction())
         } else {
           dispatch(chapterSuccessAction())
