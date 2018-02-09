@@ -42,7 +42,7 @@ function NewStory(props){
         </div>
         <div>
           <span>
-            <h5>Length of Chapters</h5>
+            <h5>Chapter Character Length</h5>
           </span>
           <input
             className = 'storyInput'

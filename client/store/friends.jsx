@@ -48,7 +48,7 @@ export function confirmFriendRequest(userId, senderId){
 				dispatch(confrimAction(newFriend))
 			})
 			.then(result => {
-				dispatch(deleteNotification({senderId}))
+				dispatch(deleteNotification(['senderId', senderId]))
 			})
 			.catch(err => console.log(err))
 	}
