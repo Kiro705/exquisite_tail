@@ -35,7 +35,9 @@ function mapDispatchToProps (dispatch, ownProps){
     handleSubmit: function(evt, user){
       evt.preventDefault();
       const nickname = evt.target.nickname.value
-      dispatch(updateUser({nickname}, user.id))
+      if(nickname.length > 0){
+        dispatch(updateUser({nickname}, user.id))
+      }
       history.push('/home')
     }
   }

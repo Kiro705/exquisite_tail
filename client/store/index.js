@@ -3,6 +3,7 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import user from './user.jsx'
 import newStory from './newStory.jsx'
+import storySubmit from './storySubmit.jsx'
 import newChapter from './newChapter.jsx'
 import chapterSubmit from './chapterSubmit.jsx'
 import stories from './stories.jsx'
@@ -14,6 +15,7 @@ import currentStory from './currentStory.jsx'
 const reducer = combineReducers({
 	user,
  	newStory,
+ 	storySubmit,
  	newChapter,
  	chapterSubmit,
  	stories,
@@ -35,6 +37,7 @@ const store = createStore(reducer, middleware)
 export default store
 export * from './user.jsx'
 export * from './newStory.jsx'
+export * from './storySubmit.jsx'
 export * from './newChapter.jsx'
 export * from './chapterSubmit.jsx'
 export * from './stories.jsx'

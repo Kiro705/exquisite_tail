@@ -9,7 +9,7 @@ const mapStateToProps = function(state) {
     newChapter: state.newChapter,
     user: state.user,
     friends: state.friends,
-    chapterMessage: state.chapterSubmit
+    chapterMessage: state.chapterSubmit,
   }
 }
 
