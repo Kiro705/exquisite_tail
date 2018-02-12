@@ -54,7 +54,7 @@ const mapDispatch = (dispatch) => {
     }
   }
 }
-
+export {UserHome}
 export default connect(mapState, mapDispatch)(UserHome)
 
 /**

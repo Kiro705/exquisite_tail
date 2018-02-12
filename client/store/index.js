@@ -26,6 +26,7 @@ const reducer = combineReducers({
  })
 
 const middlewareArray = [thunkMiddleware];
+
 const isLocal = ~location.href.indexOf('://localhost');
 if (isLocal !== 0) {
   middlewareArray.push(createLogger({collapsed: true}));
