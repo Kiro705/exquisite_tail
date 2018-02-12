@@ -7,7 +7,7 @@ import NewChapter from './new-chapter.jsx'
 import StoryCompleted from './story-completed.jsx'
 import StoryInProgress from './story-in-progress.jsx'
 
-class SingleTrip extends Component {
+class SingleStory extends Component {
 
 	componentDidMount () {
 		if(this.props.user.id){
@@ -54,4 +54,5 @@ const mapDispatch = (dispatch) => {
 	}
 }
 
-export default (connect(mapState, mapDispatch)(SingleTrip))
+export {SingleStory}
+export default (connect(mapState, mapDispatch)(SingleStory))
