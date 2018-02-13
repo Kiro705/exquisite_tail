@@ -19,7 +19,7 @@ describe('SingleStory', () => {
   it('renders an error message when no story matching ID is found', () => {
   	const story = {id: 10, title: null}
   	singleStory = shallow(<SingleStory story={story}/>)
-    expect(singleStory.find('h3').text()).to.be.equal('No story matching ID 10 was found.')
+    expect(singleStory.find('h3').text()).to.be.equal('No story matching ID ' + story.id + ' was found.')
   })
   it('renders the hidden message if the story should be hidden from you', () => {
   	const story = {id: 1, status: 'story-is-hidden'}
@@ -30,6 +30,6 @@ describe('SingleStory', () => {
   	const story = {id: 1, title: 'All done', status: 'story-finished', content: []}
   	const user = {id: 1, email: 'james@email.com'}
   	singleStory = shallow(<SingleStory story={story} user={user}/>)
-    expect(singleStory.find('StoryCompleted').props().story.title).to.be.equal('All done')
+    expect(singleStory.find('StoryCompleted').props().story.title).to.be.equal(story.title)
   })
 })

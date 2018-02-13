@@ -61,8 +61,8 @@ router.get('/:storyId/:userId', (req, res, next) => {
             } else if(theStory.status === 'story-finished') {
               res.json(theStory)
             } else {
-              theStory.content = null
-              res.json(theStory)
+              const limitedStory = {id: theStory.id, title: theStory.title, content: null, currentChapter: theStory.currentChapter, chapterLength: theStory.chapterLength, chapterAmount: theStory.chapterAmount, writerId: theStory.writerId, currentWriter: theStory.currentWriter, userId: theStory.userId, status: theStory.status}
+              res.json(limitedStory)
             }
           } else {
             res.json({id: -1, status: 'story-is-hidden'})
